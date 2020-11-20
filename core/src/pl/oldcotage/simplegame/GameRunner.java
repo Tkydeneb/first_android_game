@@ -6,6 +6,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import pl.oldcotage.simplegame.screens.MainMenuScreen;
 
 public class GameRunner extends Game {
+
+	// set game window size
+	public static final int WIDTH = 360;
+	public static final int HEIGHT = 640;
+
+
 	public SpriteBatch batch;
 
 	
