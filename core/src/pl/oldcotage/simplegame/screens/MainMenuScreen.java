@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import pl.oldcotage.simplegame.GameRunner;
 
 public class MainMenuScreen implements Screen {
+
     private static final int BUTTON_WIDTH = 120;
     private static final int BUTTON_HEIGHT = 40;
     private static final int NEW_GAME_BUTTON_Y = 520;
@@ -80,8 +81,29 @@ public class MainMenuScreen implements Screen {
     private void createButton(int xPosition, int yPosition, int mouseX, int mouseY, Texture active, Texture inactive){
         if (mouseX < xPosition + BUTTON_WIDTH && mouseX > xPosition && GameRunner.HEIGHT - mouseY < yPosition + BUTTON_HEIGHT && GameRunner.HEIGHT - mouseY > yPosition) {
             game.batch.draw(active, xPosition, yPosition, BUTTON_WIDTH, BUTTON_HEIGHT);
+            if (Gdx.input.isTouched()){
+                startAction(yPosition);
+            }
         } else {
             game.batch.draw(inactive, xPosition, yPosition, BUTTON_WIDTH, BUTTON_HEIGHT);
+        }
+    }
+
+    private void startAction(int buttonYPosition) {
+
+
+
+        if (buttonYPosition == NEW_GAME_BUTTON_Y){
+            this.dispose();
+            //TODO change to game screen
+            game.setScreen(new MainMenuScreen(game));
+        }
+        if (buttonYPosition == SETTINGS_BUTTON_Y){
+            //TODO change to settings screen
+            game.setScreen(new MainMenuScreen(game));
+        }
+        if (buttonYPosition == EXIT_BUTTON_Y){
+            Gdx.app.exit();
         }
     }
 
