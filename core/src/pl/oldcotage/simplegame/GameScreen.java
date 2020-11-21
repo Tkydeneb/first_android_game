@@ -1,4 +1,4 @@
-package pl.oldcotage.simplegame.screens;
+package pl.oldcotage.simplegame;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -6,9 +6,12 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 
 import java.util.LinkedList;
+import java.util.ListIterator;
 
+import pl.oldcotage.simplegame.EnemyShip;
 import pl.oldcotage.simplegame.GameRunner;
 import pl.oldcotage.simplegame.Laser;
+import pl.oldcotage.simplegame.PlayerShip;
 import pl.oldcotage.simplegame.Ship;
 
 public class GameScreen implements Screen {
@@ -50,13 +53,17 @@ public class GameScreen implements Screen {
         getEnemyLaserTextureRegion = textureAtlas.findRegion("pink_bullet");
 
         //setUp game objects
-        playerShip = new Ship(2,3,50,50,
-                GameRunner.WIDTH/2, GameRunner.HEIGHT/4,
-                playerShipTextureRegion);
+        playerShip = new PlayerShip(GameRunner.WIDTH/2,GameRunner.HEIGHT*3/4,
+                50,50,
+                2,4,
+                0.4f, 4,45, 0.5f,
+                playerShipTextureRegion,playerLaserTextureRegion);
 
-        enemyShip = new Ship(2,3,50,50,
-                GameRunner.WIDTH/2, GameRunner.HEIGHT*3/4,
-                enemyShipTextureRegion);
+        enemyShip = new EnemyShip(GameRunner.WIDTH/2,GameRunner.HEIGHT*3/4,
+                50,50,
+                2, 1,0.3f, 5,
+                50, 0.8f,
+                enemyShipTextureRegion, getEnemyLaserTextureRegion);
 
         playerLaserList = new LinkedList<>();
         enemyLaserList = new LinkedList<>();
@@ -83,7 +90,33 @@ public class GameScreen implements Screen {
         playerShip.draw(game.batch);
         enemyShip.draw(game.batch);
         //weapons
+        //create new lasers
 
+        //player lasers
+        if (playerShip.canFireLaser()){
+            Laser[] lasers =playerShip.fireLasers();
+            for (Laser laser: lasers){
+                playerLaserList.add(laser);
+            }
+        }
+        //enemy lasers
+        if (enemyShip.canFireLaser()){
+            Laser[] lasers =enemyShip.fireLasers();
+            for (Laser laser: lasers){
+                enemyLaserList.add(laser);
+            }
+        }
+        //draw lasers
+        //remove pld lasers
+        ListIterator<Laser> iterator = playerLaserList.listIterator();
+        while (iterator.hasNext()){
+            Laser laser = iterator.next();
+            laser.draw(game.batch);
+            laser.yPosition += laser.movementSpeed*delta;
+            if (laser.yPosition > GameRunner.HEIGHT){
+                iterator.remove();
+            }
+        }
 
         //explosions
 
