@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 import pl.oldcotage.simplegame.GameRunner;
 
 public class MainMenuScreen implements Screen {
@@ -15,8 +18,9 @@ public class MainMenuScreen implements Screen {
     private static final int EXIT_BUTTON_Y = 400;
 
 
-
-    private Texture background;
+    private TextureAtlas textureAtlas;
+    private TextureRegion[] backgrounds;
+    private TextureRegion background;
 
     private Texture newGameBtnActive;
     private Texture newGameBtnInactive;
@@ -32,14 +36,16 @@ public class MainMenuScreen implements Screen {
 
     public MainMenuScreen(GameRunner game) {
         this.game = game;
-        newGameBtnActive = new Texture("new_game_active_btn.png");
-        newGameBtnInactive = new Texture("new_game_inactive_btn.png");
-        settingsBtnActive = new Texture("settings_active_button.png");
-        settingsBtnInactive = new Texture("settings_inactive_btn.png");
-        exitBtnActive = new Texture("exit_active_button.png");
-        exitBtnInactive = new Texture("exit_inactive_btn.png");
+        textureAtlas = new TextureAtlas("images.atlas");
 
-        background = new Texture("space_background.gif");
+        newGameBtnActive = new Texture("buttons/new_game_active_btn.png");
+        newGameBtnInactive = new Texture("buttons/new_game_inactive_btn.png");
+        settingsBtnActive = new Texture("buttons/settings_active_button.png");
+        settingsBtnInactive = new Texture("buttons/settings_inactive_btn.png");
+        exitBtnActive = new Texture("buttons/exit_active_button.png");
+        exitBtnInactive = new Texture("buttons/exit_inactive_btn.png");
+
+        background = textureAtlas.findRegion("bg");
 
 
 

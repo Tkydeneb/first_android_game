@@ -1,39 +1,60 @@
 package pl.oldcotage.simplegame.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 
 import pl.oldcotage.simplegame.GameRunner;
+import pl.oldcotage.simplegame.Ship;
 
 public class GameScreen implements Screen {
-
     private final GameRunner game;
-
-    public static  final float SPEED = 240;
-
-    private Texture ship;
-    private Texture[] backgrounds;
-
+    //timing
     private float[] backgroundOffsets = {0, 0, 0, 0};
     private float backgroundMaxScrollingSpeed;
 
-    private float x;
-    private float y;
-    private float deltaTime;
+    //graphics
+    private  TextureRegion playerShipTextureRegion,enemyShipTextureRegion, playerLaserTextureRegion, getEnemyLaserTextureRegion;
+    private TextureAtlas textureAtlas;
+
+    private TextureRegion[] backgrounds;
+    //game objects
+    private Ship playerShip;
+    private Ship enemyShip;
 
 
-    public  GameScreen(GameRunner game){
+    public GameScreen(GameRunner game) {
         this.game = game;
+        //Set up the texture atlas
+        textureAtlas = new TextureAtlas("images.atlas");
 
         //Texture Array for parallax background scrolling in four layers.
-        backgrounds = new Texture[4];
-        backgrounds[0] = new Texture("space_background.gif");
-        backgrounds[1] = new Texture("space_background.gif");
-        backgrounds[2] = new Texture("space_background.gif");
-        backgrounds[3] = new Texture("space_background.gif");
+        //TODO change images for paralac effects
+        backgrounds = new TextureRegion[4];
+        backgrounds[0] = textureAtlas.findRegion("bg");
+        backgrounds[1] = textureAtlas.findRegion("bg");
+        backgrounds[2] = textureAtlas.findRegion("bg");
+        backgrounds[3] = textureAtlas.findRegion("bg");
+
+        //initialize textures
+        playerShipTextureRegion = textureAtlas.findRegion("player_ship");
+        enemyShipTextureRegion = textureAtlas.findRegion("enemy_ship");
+        enemyShipTextureRegion.flip(false,true);
+
+        playerLaserTextureRegion = textureAtlas.findRegion("blue_bullet");
+        getEnemyLaserTextureRegion = textureAtlas.findRegion("pink_bullet");
+
+        //setUp game objects
+        playerShip = new Ship(2,3,50,50,
+                GameRunner.WIDTH/2, GameRunner.HEIGHT/4,
+                playerShipTextureRegion);
+
+        enemyShip = new Ship(2,3,50,50,
+                GameRunner.WIDTH/2, GameRunner.HEIGHT*3/4,
+                enemyShipTextureRegion);
 
         //Set scrolling speed for all four background layers.
         backgroundMaxScrollingSpeed = (float) GameRunner.HEIGHT / 4;
@@ -42,39 +63,27 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-        ship = new Texture("player_blue_ship.png");
-
     }
 
     @Override
     public void render(float delta) {
-        deltaTime = Gdx.graphics.getDeltaTime();
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            y += SPEED * deltaTime;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            y -= SPEED * deltaTime;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            x -= SPEED * deltaTime;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            x += SPEED * deltaTime;
-        }
-
-
-        Gdx.gl.glClearColor(1, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
 
         game.batch.begin();
+        // scrolling background
         renderBackground(delta);
 
-        game.batch.draw(ship, x, y);
+        // enemies
 
+        //player
+        playerShip.draw(game.batch);
+        enemyShip.draw(game.batch);
+        //weapons
+
+        //explosions
 
         game.batch.end();
     }
+
     private void renderBackground(float delta) {
 
         backgroundOffsets[0] += delta * backgroundMaxScrollingSpeed / 8;
