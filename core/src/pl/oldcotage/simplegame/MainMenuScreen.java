@@ -35,7 +35,7 @@ public class MainMenuScreen implements Screen {
     public MainMenuScreen(GameRunner game) {
         this.game = game;
         textureAtlas = new TextureAtlas("images.atlas");
-
+        //TODO change to Texture atlas
         newGameBtnActive = new Texture("buttons/new_game_active_btn.png");
         newGameBtnInactive = new Texture("buttons/new_game_inactive_btn.png");
         settingsBtnActive = new Texture("buttons/settings_active_button.png");
@@ -44,9 +44,6 @@ public class MainMenuScreen implements Screen {
         exitBtnInactive = new Texture("buttons/exit_inactive_btn.png");
 
         background = textureAtlas.findRegion("bg");
-
-
-
     }
 
     @Override
@@ -61,11 +58,11 @@ public class MainMenuScreen implements Screen {
         game.batch.begin();
 
         backgroundOffset++;
-        if (backgroundOffset % GameRunner.HEIGHT == 0){
-            backgroundOffset =0;
+        if (backgroundOffset % GameRunner.HEIGHT == 0) {
+            backgroundOffset = 0;
         }
-        game.batch.draw(background,0,-backgroundOffset, GameRunner.WIDTH,GameRunner.HEIGHT);
-        game.batch.draw(background,0,-backgroundOffset + GameRunner.HEIGHT, GameRunner.WIDTH,GameRunner.HEIGHT);
+        game.batch.draw(background, 0, -backgroundOffset, GameRunner.WIDTH, GameRunner.HEIGHT);
+        game.batch.draw(background, 0, -backgroundOffset + GameRunner.HEIGHT, GameRunner.WIDTH, GameRunner.HEIGHT);
 
         renderButtons();
 
@@ -73,20 +70,20 @@ public class MainMenuScreen implements Screen {
     }
 
 
-    private void renderButtons(){
+    private void renderButtons() {
         int x = GameRunner.WIDTH / 2 - BUTTON_WIDTH / 2;
         int mouseX = Gdx.input.getX();
         int mouseY = Gdx.input.getY();
 
-        createButton(x, NEW_GAME_BUTTON_Y, mouseX, mouseY, newGameBtnActive,newGameBtnInactive);
-        createButton(x, SETTINGS_BUTTON_Y, mouseX, mouseY, settingsBtnActive,settingsBtnInactive);
-        createButton(x, EXIT_BUTTON_Y, mouseX, mouseY,exitBtnActive,exitBtnInactive);
+        createButton(x, NEW_GAME_BUTTON_Y, mouseX, mouseY, newGameBtnActive, newGameBtnInactive);
+        createButton(x, SETTINGS_BUTTON_Y, mouseX, mouseY, settingsBtnActive, settingsBtnInactive);
+        createButton(x, EXIT_BUTTON_Y, mouseX, mouseY, exitBtnActive, exitBtnInactive);
     }
 
-    private void createButton(int xPosition, int yPosition, int mouseX, int mouseY, Texture active, Texture inactive){
+    private void createButton(int xPosition, int yPosition, int mouseX, int mouseY, Texture active, Texture inactive) {
         if (mouseX < xPosition + BUTTON_WIDTH && mouseX > xPosition && GameRunner.HEIGHT - mouseY < yPosition + BUTTON_HEIGHT && GameRunner.HEIGHT - mouseY > yPosition) {
             game.batch.draw(active, xPosition, yPosition, BUTTON_WIDTH, BUTTON_HEIGHT);
-            if (Gdx.input.isTouched()){
+            if (Gdx.input.isTouched()) {
                 startAction(yPosition);
             }
         } else {
@@ -97,16 +94,15 @@ public class MainMenuScreen implements Screen {
     private void startAction(int buttonYPosition) {
 
 
-
-        if (buttonYPosition == NEW_GAME_BUTTON_Y){
+        if (buttonYPosition == NEW_GAME_BUTTON_Y) {
             this.dispose();
             game.setScreen(new GameScreen(game));
         }
-        if (buttonYPosition == SETTINGS_BUTTON_Y){
+        if (buttonYPosition == SETTINGS_BUTTON_Y) {
             //TODO change to settings screen
             game.setScreen(new MainMenuScreen(game));
         }
-        if (buttonYPosition == EXIT_BUTTON_Y){
+        if (buttonYPosition == EXIT_BUTTON_Y) {
             Gdx.app.exit();
         }
     }
