@@ -15,10 +15,9 @@ public class MainMenuScreen implements Screen {
     private static final int EXIT_BUTTON_Y = 400;
 
 
-    private float[] backgroundOffsets = {0, 0, 0, 0};
-    private float backgroundMaxScrollingSpeed;
 
-    private Texture[] backgrounds;
+    private Texture background;
+
     private Texture newGameBtnActive;
     private Texture newGameBtnInactive;
     private Texture settingsBtnActive;
@@ -26,7 +25,9 @@ public class MainMenuScreen implements Screen {
     private Texture exitBtnActive;
     private Texture exitBtnInactive;
 
-    GameRunner game;
+    private float backgroundOffset;
+
+    public GameRunner game;
 
 
     public MainMenuScreen(GameRunner game) {
@@ -38,16 +39,10 @@ public class MainMenuScreen implements Screen {
         exitBtnActive = new Texture("exit_active_button.png");
         exitBtnInactive = new Texture("exit_inactive_btn.png");
 
+        background = new Texture("space_background.gif");
 
-        //Texture Array for parallax background scrolling in four layers.
-        backgrounds = new Texture[4];
-        backgrounds[0] = new Texture("space_background.gif");
-        backgrounds[1] = new Texture("space_background.gif");
-        backgrounds[2] = new Texture("space_background.gif");
-        backgrounds[3] = new Texture("space_background.gif");
 
-        //Set scrolling speed for all four background layers.
-        backgroundMaxScrollingSpeed = (float) GameRunner.HEIGHT / 4;
+
     }
 
     @Override
@@ -61,7 +56,13 @@ public class MainMenuScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
 
-        renderBackground(delta);
+        backgroundOffset++;
+        if (backgroundOffset % GameRunner.HEIGHT == 0){
+            backgroundOffset =0;
+        }
+        game.batch.draw(background,0,-backgroundOffset, GameRunner.WIDTH,GameRunner.HEIGHT);
+        game.batch.draw(background,0,-backgroundOffset + GameRunner.HEIGHT, GameRunner.WIDTH,GameRunner.HEIGHT);
+
         renderButtons();
 
         game.batch.end();
@@ -95,8 +96,7 @@ public class MainMenuScreen implements Screen {
 
         if (buttonYPosition == NEW_GAME_BUTTON_Y){
             this.dispose();
-            //TODO change to game screen
-            game.setScreen(new MainMenuScreen(game));
+            game.setScreen(new GameScreen(game));
         }
         if (buttonYPosition == SETTINGS_BUTTON_Y){
             //TODO change to settings screen
@@ -104,28 +104,6 @@ public class MainMenuScreen implements Screen {
         }
         if (buttonYPosition == EXIT_BUTTON_Y){
             Gdx.app.exit();
-        }
-    }
-
-    private void renderBackground(float delta) {
-
-        backgroundOffsets[0] += delta * backgroundMaxScrollingSpeed / 8;
-        backgroundOffsets[1] += delta * backgroundMaxScrollingSpeed / 4;
-        backgroundOffsets[2] += delta * backgroundMaxScrollingSpeed / 2;
-        backgroundOffsets[3] += delta * backgroundMaxScrollingSpeed;
-
-        for (int layer = 0; layer < backgroundOffsets.length; layer++) {
-            if (backgroundOffsets[layer] > GameRunner.HEIGHT) {
-                backgroundOffsets[layer] = 0;
-            }
-            game.batch.draw(backgrounds[layer], 0,
-                    -backgroundOffsets[layer],
-                    GameRunner.WIDTH,
-                    GameRunner.HEIGHT);
-            game.batch.draw(backgrounds[layer], 0,
-                    -backgroundOffsets[layer] + GameRunner.HEIGHT,
-                    GameRunner.WIDTH,
-                    GameRunner.HEIGHT);
         }
     }
 
