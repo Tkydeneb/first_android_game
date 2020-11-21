@@ -3,7 +3,7 @@ package pl.oldcotage.simplegame;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class Ship {
+abstract class Ship {
     //shp characteristics
     float movementSpeed;
     int hitPoints;
@@ -12,23 +12,46 @@ public class Ship {
     float xPosition, yPosition;
     float width, height;
 
-    //graphics
-    TextureRegion shipTexture;
+    //laser information
+    float laserWidth, laserHeight;
+    float laserMovementSpeed;
+    float timeBetweenShoots;
+    float timeSinceLastShot = 0;
 
-    public Ship(float movementSpeed, int hitPoints,
+    //graphics
+    TextureRegion shipTextureRegion, laserTextureRegion;
+
+    public Ship(float xCentre, float yCentre,
                 float width, float height,
-                float xCentre, float yCentre,
-                TextureRegion shipTexture) {
+                float movementSpeed, int hitPoints,
+                float laserWidth, float laserHeight, float laserMovementSpeed, float timeBetweenShoots,
+                TextureRegion shipTextureRegion,
+                TextureRegion laserTextureRegion) {
         this.movementSpeed = movementSpeed;
         this.hitPoints = hitPoints;
-        this.xPosition = xCentre - width/2;
-        this.yPosition = yCentre - height/2;
+        this.xPosition = xCentre - width / 2;
+        this.yPosition = yCentre - height / 2;
         this.width = width;
         this.height = height;
-        this.shipTexture = shipTexture;
+        this.shipTextureRegion = shipTextureRegion;
+        this.laserTextureRegion = laserTextureRegion;
+        this.timeBetweenShoots = timeBetweenShoots;
+        this.laserWidth = laserWidth;
+        this.laserHeight = laserHeight;
+        this.laserMovementSpeed = laserMovementSpeed;
     }
 
-    public void draw(Batch batch){
-        batch.draw(shipTexture, xPosition,yPosition,width,height);
+    public void update(float deltaTime) {
+        timeSinceLastShot += deltaTime;
+    }
+
+    public boolean canFireLaser() {
+        return (timeSinceLastShot - timeBetweenShoots >=0);
+    }
+
+    public abstract Laser[] fireLasers();
+
+    public void draw(Batch batch) {
+        batch.draw(shipTextureRegion, xPosition, yPosition, width, height);
     }
 }

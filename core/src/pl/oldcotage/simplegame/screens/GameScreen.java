@@ -1,13 +1,14 @@
 package pl.oldcotage.simplegame.screens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 
+import java.util.LinkedList;
+
 import pl.oldcotage.simplegame.GameRunner;
+import pl.oldcotage.simplegame.Laser;
 import pl.oldcotage.simplegame.Ship;
 
 public class GameScreen implements Screen {
@@ -24,7 +25,8 @@ public class GameScreen implements Screen {
     //game objects
     private Ship playerShip;
     private Ship enemyShip;
-
+    private LinkedList<Laser> playerLaserList;
+    private LinkedList<Laser> enemyLaserList;
 
     public GameScreen(GameRunner game) {
         this.game = game;
@@ -56,6 +58,9 @@ public class GameScreen implements Screen {
                 GameRunner.WIDTH/2, GameRunner.HEIGHT*3/4,
                 enemyShipTextureRegion);
 
+        playerLaserList = new LinkedList<>();
+        enemyLaserList = new LinkedList<>();
+
         //Set scrolling speed for all four background layers.
         backgroundMaxScrollingSpeed = (float) GameRunner.HEIGHT / 4;
     }
@@ -78,6 +83,7 @@ public class GameScreen implements Screen {
         playerShip.draw(game.batch);
         enemyShip.draw(game.batch);
         //weapons
+
 
         //explosions
 
