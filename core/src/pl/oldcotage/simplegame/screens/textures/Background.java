@@ -1,4 +1,4 @@
-package pl.oldcotage.simplegame.screens.backgrounds;
+package pl.oldcotage.simplegame.screens.textures;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import pl.oldcotage.simplegame.GameRunner;
 
+/**
+ * Class for setting background textures and rendering
+ */
 public class Background {
     private float backgroundOffset;
     private float[] backgroundOffsets = {0, 0, 0, 0};
@@ -17,15 +20,16 @@ public class Background {
     public Background() {
     }
 
-    private void setTextureAtlas(){
+    //initialize texture atlas
+    private void setTextureAtlas() {
         textureAtlas = new TextureAtlas("images.atlas");
 
     }
 
-    private void setBackgroundTexture(){
+    //setting texture array for parallax background scrolling in four layers
+    //TODO change images for parallax effects
+    private void setBackgroundTexture() {
         setTextureAtlas();
-        //Texture Array for parallax background scrolling in four layers.
-        //TODO change images for parallax effects
         backgrounds = new TextureRegion[4];
         backgrounds[0] = textureAtlas.findRegion("bg");
         backgrounds[1] = textureAtlas.findRegion("bg");
@@ -35,6 +39,7 @@ public class Background {
         backgroundMaxScrollingSpeed = (float) GameRunner.HEIGHT / 8;
     }
 
+    //Method for rendering background in parallax
     public void renderParallaxBackground(float delta, SpriteBatch batch) {
         setBackgroundTexture();
 
@@ -57,15 +62,22 @@ public class Background {
                     GameRunner.HEIGHT);
         }
     }
-    public void renderSingleBackground(SpriteBatch batch){
+
+    //rendering background with single texture
+    public void renderSingleBackground(SpriteBatch batch) {
         setTextureAtlas();
         background = textureAtlas.findRegion("bg");
         backgroundOffset++;
         if (backgroundOffset % GameRunner.HEIGHT == 0) {
             backgroundOffset = 0;
         }
-        batch.draw(background, 0, -backgroundOffset, GameRunner.WIDTH, GameRunner.HEIGHT);
-        batch.draw(background, 0, -backgroundOffset + GameRunner.HEIGHT, GameRunner.WIDTH, GameRunner.HEIGHT);
-
+        batch.draw(background, 0,
+                -backgroundOffset,
+                GameRunner.WIDTH,
+                GameRunner.HEIGHT);
+        batch.draw(background, 0,
+                -backgroundOffset + GameRunner.HEIGHT,
+                GameRunner.WIDTH,
+                GameRunner.HEIGHT);
     }
 }

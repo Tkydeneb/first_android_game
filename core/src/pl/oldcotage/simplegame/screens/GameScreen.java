@@ -14,7 +14,7 @@ import pl.oldcotage.simplegame.GameRunner;
 import pl.oldcotage.simplegame.objects.weapons.Laser;
 import pl.oldcotage.simplegame.objects.PlayerShip;
 import pl.oldcotage.simplegame.objects.Ship;
-import pl.oldcotage.simplegame.screens.backgrounds.Background;
+import pl.oldcotage.simplegame.screens.textures.Background;
 
 public class GameScreen implements Screen {
     private final GameRunner game;
@@ -65,9 +65,6 @@ public class GameScreen implements Screen {
 
         playerLaserList = new LinkedList<>();
         enemyLaserList = new LinkedList<>();
-
-        //Set scrolling speed for all four background layers.
-
     }
 
 
@@ -81,7 +78,6 @@ public class GameScreen implements Screen {
 
         playerShip.update(delta);
         enemyShip.update(delta);
-
         // scrolling background
         background.renderSingleBackground(batch);
 
@@ -90,7 +86,6 @@ public class GameScreen implements Screen {
         //weapons
 
         //create new lasers
-
         //player lasers
         if (playerShip.canFireLaser()) {
             Laser[] lasers = playerShip.fireLasers();

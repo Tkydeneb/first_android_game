@@ -1,0 +1,48 @@
+
+buttons.png
+size: 2048,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+exit_active_button
+  rotate: false
+  xy: 604, 2
+  size: 600, 200
+  orig: 600, 200
+  offset: 0, 0
+  index: -1
+exit_inactive_btn
+  rotate: false
+  xy: 1206, 2
+  size: 600, 200
+  orig: 600, 200
+  offset: 0, 0
+  index: -1
+new_game_active_btn
+  rotate: false
+  xy: 2, 204
+  size: 600, 200
+  orig: 600, 200
+  offset: 0, 0
+  index: -1
+new_game_inactive_btn
+  rotate: false
+  xy: 604, 204
+  size: 600, 200
+  orig: 600, 200
+  offset: 0, 0
+  index: -1
+settings_active_button
+  rotate: false
+  xy: 1206, 204
+  size: 600, 200
+  orig: 600, 200
+  offset: 0, 0
+  index: -1
+settings_inactive_btn
+  rotate: false
+  xy: 2, 2
+  size: 600, 200
+  orig: 600, 200
+  offset: 0, 0
+  index: -1
