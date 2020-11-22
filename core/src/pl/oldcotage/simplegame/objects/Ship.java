@@ -1,25 +1,27 @@
-package pl.oldcotage.simplegame;
+package pl.oldcotage.simplegame.objects;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-abstract class Ship {
+import pl.oldcotage.simplegame.objects.weapons.Laser;
+
+abstract public class Ship {
     //shp characteristics
-    float movementSpeed;
-    int hitPoints;
+    public float movementSpeed;
+    public int hitPoints;
 
     //position & dimension
-    float xPosition, yPosition;
-    float width, height;
+    public float xPosition, yPosition;
+    public float width, height;
 
     //laser information
-    float laserWidth, laserHeight;
-    float laserMovementSpeed;
-    float timeBetweenShoots;
-    float timeSinceLastShot = 0;
+    public float laserWidth, laserHeight;
+    public float laserMovementSpeed;
+    public float timeBetweenShoots;
+    public float timeSinceLastShot = 0;
 
     //graphics
-    TextureRegion shipTextureRegion, laserTextureRegion;
+    public TextureRegion shipTextureRegion, laserTextureRegion;
 
     public Ship(float xCentre, float yCentre,
                 float width, float height,

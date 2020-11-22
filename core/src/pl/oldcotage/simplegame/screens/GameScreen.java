@@ -1,4 +1,4 @@
-package pl.oldcotage.simplegame;
+package pl.oldcotage.simplegame.screens;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -9,19 +9,25 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+import pl.oldcotage.simplegame.objects.enemies.EnemyShip;
+import pl.oldcotage.simplegame.GameRunner;
+import pl.oldcotage.simplegame.objects.weapons.Laser;
+import pl.oldcotage.simplegame.objects.PlayerShip;
+import pl.oldcotage.simplegame.objects.Ship;
+import pl.oldcotage.simplegame.screens.backgrounds.Background;
+
 public class GameScreen implements Screen {
     private final GameRunner game;
     public SpriteBatch batch;
 
     //timing
-    private float[] backgroundOffsets = {0, 0, 0, 0};
-    private float backgroundMaxScrollingSpeed;
+
 
     //graphics
+    Background background;
     private TextureRegion playerShipTextureRegion, enemyShipTextureRegion, playerLaserTextureRegion, enemyLaserTextureRegion;
     private TextureAtlas textureAtlas;
 
-    private TextureRegion[] backgrounds;
 
     //game objects
     private Ship playerShip;
@@ -32,18 +38,11 @@ public class GameScreen implements Screen {
     public GameScreen(GameRunner game) {
         batch = new SpriteBatch();
         this.game = game;
-        //Set up the texture atlas
+
+
         textureAtlas = new TextureAtlas("images.atlas");
-
-        //Texture Array for parallax background scrolling in four layers.
-        //TODO change images for parallax effects
-        backgrounds = new TextureRegion[4];
-        backgrounds[0] = textureAtlas.findRegion("bg");
-        backgrounds[1] = textureAtlas.findRegion("bg");
-        backgrounds[2] = textureAtlas.findRegion("bg");
-        backgrounds[3] = textureAtlas.findRegion("bg");
-
         //initialize textures
+        background = new Background();
         playerShipTextureRegion = textureAtlas.findRegion("player_ship");
         enemyShipTextureRegion = textureAtlas.findRegion("enemy_ship");
         enemyShipTextureRegion.flip(false, true);
@@ -68,7 +67,7 @@ public class GameScreen implements Screen {
         enemyLaserList = new LinkedList<>();
 
         //Set scrolling speed for all four background layers.
-        backgroundMaxScrollingSpeed = (float) GameRunner.HEIGHT / 4;
+
     }
 
 
@@ -78,22 +77,18 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-
         batch.begin();
-
 
         playerShip.update(delta);
         enemyShip.update(delta);
 
         // scrolling background
-        renderBackground(delta);
+        background.renderSingleBackground(batch);
 
-        // enemies
-
-        //player
         playerShip.draw(batch);
         enemyShip.draw(batch);
         //weapons
+
         //create new lasers
 
         //player lasers
@@ -111,7 +106,7 @@ public class GameScreen implements Screen {
             }
         }
         //draw lasers
-        //remove pld lasers
+        //remove lasers
         ListIterator<Laser> iterator = playerLaserList.listIterator();
         while (iterator.hasNext()) {
             Laser laser = iterator.next();
@@ -131,33 +126,10 @@ public class GameScreen implements Screen {
                 iterator.remove();
             }
         }
-
-        //explosions
-
         batch.end();
     }
 
-    private void renderBackground(float delta) {
 
-        backgroundOffsets[0] += delta * backgroundMaxScrollingSpeed / 8;
-        backgroundOffsets[1] += delta * backgroundMaxScrollingSpeed / 4;
-        backgroundOffsets[2] += delta * backgroundMaxScrollingSpeed / 2;
-        backgroundOffsets[3] += delta * backgroundMaxScrollingSpeed;
-
-        for (int layer = 0; layer < backgroundOffsets.length; layer++) {
-            if (backgroundOffsets[layer] > GameRunner.HEIGHT) {
-                backgroundOffsets[layer] = 0;
-            }
-            batch.draw(backgrounds[layer], 0,
-                    -backgroundOffsets[layer],
-                    GameRunner.WIDTH,
-                    GameRunner.HEIGHT);
-            batch.draw(backgrounds[layer], 0,
-                    -backgroundOffsets[layer] + GameRunner.HEIGHT,
-                    GameRunner.WIDTH,
-                    GameRunner.HEIGHT);
-        }
-    }
 
     @Override
     public void resize(int width, int height) {

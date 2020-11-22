@@ -1,11 +1,12 @@
-package pl.oldcotage.simplegame;
+package pl.oldcotage.simplegame.objects.enemies;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class PlayerShip extends Ship {
+import pl.oldcotage.simplegame.objects.weapons.Laser;
+import pl.oldcotage.simplegame.objects.Ship;
 
-
-    public PlayerShip(float xCentre, float yCentre,
+public class EnemyShip extends Ship {
+    public EnemyShip(float xCentre, float yCentre,
                       float width, float height,
                       float movementSpeed, int hitPoints,
                       float laserWidth, float laserHeight,
@@ -22,11 +23,12 @@ public class PlayerShip extends Ship {
                 laserTextureRegion);
     }
 
+
     @Override
     public Laser[] fireLasers() {
         Laser[] laser = new Laser[2];
-        laser[0] = new Laser(xPosition+width*0.25f,yPosition+height*0.45f,laserWidth,laserHeight,laserTextureRegion,laserMovementSpeed);
-        laser[1] = new Laser(xPosition+width*0.75f,yPosition+height*0.45f,laserWidth,laserHeight,laserTextureRegion,laserMovementSpeed);
+        laser[0] = new Laser(xPosition+width*0.35f,yPosition+height*0.45f,laserWidth,laserHeight,laserTextureRegion,laserMovementSpeed);
+        laser[1] = new Laser(xPosition + width * 0.65f, yPosition + height * 0.45f, laserWidth, laserHeight, laserTextureRegion, laserMovementSpeed);
 
         timeSinceLastShot = 0;
 

@@ -1,11 +1,13 @@
-package pl.oldcotage.simplegame;
+package pl.oldcotage.simplegame.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
+import pl.oldcotage.simplegame.GameRunner;
+import pl.oldcotage.simplegame.screens.backgrounds.Background;
 
 public class MainMenuScreen implements Screen {
 
@@ -15,10 +17,7 @@ public class MainMenuScreen implements Screen {
     private static final int SETTINGS_BUTTON_Y = 460;
     private static final int EXIT_BUTTON_Y = 400;
 
-
-    private TextureAtlas textureAtlas;
-    private TextureRegion[] backgrounds;
-    private TextureRegion background;
+    private Background background;
 
     private Texture newGameBtnActive;
     private Texture newGameBtnInactive;
@@ -27,23 +26,22 @@ public class MainMenuScreen implements Screen {
     private Texture exitBtnActive;
     private Texture exitBtnInactive;
 
-    private float backgroundOffset;
+
 
     public GameRunner game;
 
 
     public MainMenuScreen(GameRunner game) {
         this.game = game;
-        textureAtlas = new TextureAtlas("images.atlas");
         //TODO change to Texture atlas
+        background = new Background();
+
         newGameBtnActive = new Texture("buttons/new_game_active_btn.png");
         newGameBtnInactive = new Texture("buttons/new_game_inactive_btn.png");
         settingsBtnActive = new Texture("buttons/settings_active_button.png");
         settingsBtnInactive = new Texture("buttons/settings_inactive_btn.png");
         exitBtnActive = new Texture("buttons/exit_active_button.png");
         exitBtnInactive = new Texture("buttons/exit_inactive_btn.png");
-
-        background = textureAtlas.findRegion("bg");
     }
 
     @Override
@@ -53,17 +51,9 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
 
-        backgroundOffset++;
-        if (backgroundOffset % GameRunner.HEIGHT == 0) {
-            backgroundOffset = 0;
-        }
-        game.batch.draw(background, 0, -backgroundOffset, GameRunner.WIDTH, GameRunner.HEIGHT);
-        game.batch.draw(background, 0, -backgroundOffset + GameRunner.HEIGHT, GameRunner.WIDTH, GameRunner.HEIGHT);
-
+        background.renderSingleBackground(game.batch);
         renderButtons();
 
         game.batch.end();

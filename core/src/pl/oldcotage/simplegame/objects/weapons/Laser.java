@@ -1,4 +1,4 @@
-package pl.oldcotage.simplegame;
+package pl.oldcotage.simplegame.objects.weapons;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -6,14 +6,14 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Laser {
 
     //position and dimensions
-    float xPosition, yPosition;
-    float width, height;
+    public float xPosition, yPosition;
+    public float width, height;
 
     //graphics
-    TextureRegion textureRegion;
+    public TextureRegion textureRegion;
 
     //laser physical characteristics
-    float movementSpeed;
+    public float movementSpeed;
 
     public Laser(float xPosition, float yPosition, float width, float height, TextureRegion textureRegion, float movementSpeed) {
         this.xPosition = xPosition;

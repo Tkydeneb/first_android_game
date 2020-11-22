@@ -3,6 +3,8 @@ package pl.oldcotage.simplegame;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import pl.oldcotage.simplegame.screens.MainMenuScreen;
+
 public class GameRunner extends Game {
 
 	// set game window size
