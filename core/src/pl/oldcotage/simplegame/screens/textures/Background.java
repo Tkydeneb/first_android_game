@@ -10,6 +10,7 @@ import pl.oldcotage.simplegame.GameRunner;
  * Class for setting background textures and rendering
  */
 public class Background {
+
     private float backgroundOffset;
     private float[] backgroundOffsets = {0, 0, 0, 0};
     private float backgroundMaxScrollingSpeed;
@@ -23,7 +24,6 @@ public class Background {
     //initialize texture atlas
     private void setTextureAtlas() {
         textureAtlas = new TextureAtlas("images.atlas");
-
     }
 
     //setting texture array for parallax background scrolling in four layers
