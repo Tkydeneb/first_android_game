@@ -34,7 +34,6 @@ public class Button {
     private TextureRegion exitBtnActive;
     private TextureRegion exitBtnInactive;
 
-    private SpriteBatch batch;
     private Screen screen;
     private GameRunner gameRunner;
     private Game game;
@@ -42,11 +41,10 @@ public class Button {
     private int mouseY;
 
 
-    public Button(SpriteBatch batch, Screen screen, GameRunner gameRunner, Game game) {
-        this.batch = batch;
+    public Button(Screen screen, Game game,GameRunner gameRunner) {
         this.screen = screen;
-        this.gameRunner = gameRunner;
         this.game = game;
+        this.gameRunner = gameRunner;
     }
 
     //initialize texture atlas
@@ -78,12 +76,12 @@ public class Button {
 
     private void createButton(int yPosition, TextureRegion active, TextureRegion inactive) {
         if (mouseX < X + BUTTON_WIDTH && mouseX > X && GameRunner.HEIGHT - mouseY < yPosition + BUTTON_HEIGHT && GameRunner.HEIGHT - mouseY > yPosition) {
-            batch.draw(active, X, yPosition, BUTTON_WIDTH, BUTTON_HEIGHT);
+            gameRunner.batch.draw(active, X, yPosition, BUTTON_WIDTH, BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 startAction(yPosition);
             }
         } else {
-            batch.draw(inactive, X, yPosition, BUTTON_WIDTH, BUTTON_HEIGHT);
+            gameRunner.batch.draw(inactive, X, yPosition, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
     }
     private void startAction(int buttonYPosition) {

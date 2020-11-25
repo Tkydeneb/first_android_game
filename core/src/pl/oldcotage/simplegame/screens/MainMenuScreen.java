@@ -17,7 +17,7 @@ public class MainMenuScreen implements Screen {
     public MainMenuScreen(GameRunner game) {
         this.game = game;
         background = new Background();
-        button = new Button(game.batch,this,game,game);
+        button = new Button(this, game, game);
     }
     @Override
     public void show() {
@@ -27,8 +27,9 @@ public class MainMenuScreen implements Screen {
     @Override
     public void render(float delta) {
         game.batch.begin();
-        button.renderButtons();
+
         background.renderSingleBackground(game.batch);
+        button.renderButtons();
         game.batch.end();
     }
     @Override
