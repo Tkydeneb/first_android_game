@@ -30,6 +30,7 @@ public class MainMenuScreen implements Screen {
 
         background.renderSingleBackground(game.batch);
         button.renderButtons();
+
         game.batch.end();
     }
     @Override

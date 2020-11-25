@@ -1,5 +1,7 @@
 package pl.oldcotage.simplegame.screens;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -63,6 +65,7 @@ public class GameScreen implements Screen {
                 50, 0.8f,
                 enemyShipTextureRegion, enemyLaserTextureRegion);
 
+
         playerLaserList = new LinkedList<>();
         enemyLaserList = new LinkedList<>();
     }
@@ -121,9 +124,25 @@ public class GameScreen implements Screen {
                 iterator.remove();
             }
         }
+
+        // move ship
+        movingShip();
+
         batch.end();
     }
 
+    private void movingShip() {
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            float x = playerShip.getPosition();
+            x--;
+            playerShip.setPosition(x);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            float x = playerShip.getPosition();
+            x++;
+            playerShip.setPosition(x);
+        }
+    }
 
 
     @Override

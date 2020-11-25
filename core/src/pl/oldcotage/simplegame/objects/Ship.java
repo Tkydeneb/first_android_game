@@ -56,4 +56,12 @@ abstract public class Ship {
     public void draw(Batch batch) {
         batch.draw(shipTextureRegion, xPosition, yPosition, width, height);
     }
+
+    public float getPosition() {
+        return xPosition;
+    }
+
+    public void setPosition(float x) {
+        xPosition = x;
+    }
 }
