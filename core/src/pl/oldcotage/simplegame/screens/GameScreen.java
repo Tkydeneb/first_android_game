@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
@@ -53,16 +55,16 @@ public class GameScreen implements Screen {
         enemyLaserTextureRegion = textureAtlas.findRegion("pink_bullet");
 
         //setUp game objects
-        playerShip = new PlayerShip(GameRunner.WIDTH / 2, GameRunner.HEIGHT / 4,
+        playerShip = new PlayerShip((float) GameRunner.WIDTH / 2, (float)GameRunner.HEIGHT / 4,
                 50, 50,
-                2, 4,
+                15, 4,
                 0.4f, 4, 45, 0.5f,
                 playerShipTextureRegion, playerLaserTextureRegion);
 
-        enemyShip = new EnemyShip(GameRunner.WIDTH / 2, GameRunner.HEIGHT * 3 / 4,
+        enemyShip = new EnemyShip((float)GameRunner.WIDTH / 2, (float) GameRunner.HEIGHT * 3 / 4,
                 50, 50,
                 2, 1, 0.3f, 5,
-                50, 0.8f,
+                50, 0.9f,
                 enemyShipTextureRegion, enemyLaserTextureRegion);
 
 
@@ -78,7 +80,6 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         batch.begin();
-
         playerShip.update(delta);
         enemyShip.update(delta);
         // scrolling background
@@ -92,16 +93,12 @@ public class GameScreen implements Screen {
         //player lasers
         if (playerShip.canFireLaser()) {
             Laser[] lasers = playerShip.fireLasers();
-            for (Laser laser : lasers) {
-                playerLaserList.add(laser);
-            }
+            playerLaserList.addAll(Arrays.asList(lasers));
         }
         //enemy lasers
         if (enemyShip.canFireLaser()) {
             Laser[] lasers = enemyShip.fireLasers();
-            for (Laser laser : lasers) {
-                enemyLaserList.add(laser);
-            }
+            enemyLaserList.addAll(Arrays.asList(lasers));
         }
         //draw lasers
         //remove lasers
@@ -125,24 +122,13 @@ public class GameScreen implements Screen {
             }
         }
 
-        // move ship
-        movingShip();
+        playerShip.movingShip(textureAtlas);
 
         batch.end();
     }
 
-    private void movingShip() {
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            float x = playerShip.getPosition();
-            x--;
-            playerShip.setPosition(x);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            float x = playerShip.getPosition();
-            x++;
-            playerShip.setPosition(x);
-        }
-    }
+    //method for moving ship and rendering
+
 
 
     @Override

@@ -32,7 +32,7 @@ limitMemory=true
 useIndexes=true
 
 scaleFactors=[{suffix:"",factor:1,resampling:bicubic}]
-inputFiles=[{path:bg.png,type:Input,regionName:null},{path:player_ship.png,type:Input,regionName:null},{path:blue_bullet.png,type:Input,regionName:null},{path:enemy_ship.png,type:Input,regionName:null},{path:pink_bullet.png,type:Input,regionName:null}]
+inputFiles=[{path:bg.png,type:Input,regionName:null},{path:player_ship.png,type:Input,regionName:null},{path:blue_bullet.png,type:Input,regionName:null},{path:enemy_ship.png,type:Input,regionName:null},{path:pink_bullet.png,type:Input,regionName:null},{path:player_ship_left_2.png,type:Input,regionName:null},{path:player_ship_right_4.png,type:Input,regionName:null},{path:player_ship_left_3.png,type:Input,regionName:null},{path:player_ship_left_4.png,type:Input,regionName:null},{path:player_ship_right_2.png,type:Input,regionName:null},{path:player_ship_right_3.png,type:Input,regionName:null}]
 
 
 -PROJ-

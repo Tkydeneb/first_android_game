@@ -1,6 +1,7 @@
 package pl.oldcotage.simplegame.objects;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import pl.oldcotage.simplegame.objects.weapons.Laser;
@@ -43,6 +44,10 @@ abstract public class Ship {
         this.laserMovementSpeed = laserMovementSpeed;
     }
 
+    public void setShipTextureRegion(TextureRegion shipTextureRegion) {
+        this.shipTextureRegion = shipTextureRegion;
+    }
+
     public void update(float deltaTime) {
         timeSinceLastShot += deltaTime;
     }
@@ -52,6 +57,7 @@ abstract public class Ship {
     }
 
     public abstract Laser[] fireLasers();
+    public abstract void movingShip(TextureAtlas textureAtlas);
 
     public void draw(Batch batch) {
         batch.draw(shipTextureRegion, xPosition, yPosition, width, height);
