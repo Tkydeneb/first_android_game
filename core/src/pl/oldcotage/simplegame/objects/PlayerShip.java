@@ -5,24 +5,29 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import pl.oldcotage.simplegame.GameRunner;
 import pl.oldcotage.simplegame.objects.weapons.Laser;
 
 public class PlayerShip extends Ship {
 
+    // starting ship statistics
+    private final static float WIDTH_SHIP = 50;
+    private final static float HEIGHT_SHIP = 50;
+    private final static float INITIAL_SPEED = 90;
+    private final static int INITIAL_HIT_POINTS = 3;
+    private final static float INITIAL_BULLET_SPEED = 45;
+    private final static float INITIAL_ATTACK_SPEED = 0.5f;
 
-    public PlayerShip(float xCentre, float yCentre,
-                      float width, float height,
-                      float movementSpeed, int hitPoints,
+    public PlayerShip(
                       float laserWidth, float laserHeight,
-                      float laserMovementSpeed, float timeBetweenShoots,
                       TextureRegion shipTextureRegion,
                       TextureRegion laserTextureRegion) {
 
-        super(xCentre, yCentre,
-                width, height,
-                movementSpeed, hitPoints,
+        super((float) GameRunner.WIDTH / 2, (float)GameRunner.HEIGHT / 4,
+                WIDTH_SHIP, HEIGHT_SHIP,
+                INITIAL_SPEED, INITIAL_HIT_POINTS,
                 laserWidth, laserHeight,
-                laserMovementSpeed, timeBetweenShoots,
+                INITIAL_BULLET_SPEED, INITIAL_ATTACK_SPEED,
                 shipTextureRegion,
                 laserTextureRegion);
     }

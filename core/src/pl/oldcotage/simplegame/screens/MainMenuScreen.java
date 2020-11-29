@@ -1,9 +1,6 @@
 package pl.oldcotage.simplegame.screens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Texture;
-
 import pl.oldcotage.simplegame.GameRunner;
 import pl.oldcotage.simplegame.screens.textures.Background;
 import pl.oldcotage.simplegame.screens.textures.Button;
@@ -11,14 +8,17 @@ import pl.oldcotage.simplegame.screens.textures.Button;
 public class MainMenuScreen implements Screen {
 
     private Background background;
-    private Button button;
+
+    private Button buttons;
     public GameRunner game;
+
 
     public MainMenuScreen(GameRunner game) {
         this.game = game;
         background = new Background();
-        button = new Button(this, game, game);
+        buttons = new Button(this, game,game);
     }
+
     @Override
     public void show() {
 
@@ -29,10 +29,11 @@ public class MainMenuScreen implements Screen {
         game.batch.begin();
 
         background.renderSingleBackground(game.batch);
-        button.renderButtons();
+        buttons.renderButtons();
 
         game.batch.end();
     }
+
     @Override
     public void resize(int width, int height) {
     }

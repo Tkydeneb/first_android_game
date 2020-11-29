@@ -55,10 +55,7 @@ public class GameScreen implements Screen {
         enemyLaserTextureRegion = textureAtlas.findRegion("pink_bullet");
 
         //setUp game objects
-        playerShip = new PlayerShip((float) GameRunner.WIDTH / 2, (float)GameRunner.HEIGHT / 4,
-                50, 50,
-                15, 4,
-                0.4f, 4, 45, 0.5f,
+        playerShip = new PlayerShip(0.4f, 4,
                 playerShipTextureRegion, playerLaserTextureRegion);
 
         enemyShip = new EnemyShip((float)GameRunner.WIDTH / 2, (float) GameRunner.HEIGHT * 3 / 4,
