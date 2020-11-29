@@ -1,4 +1,4 @@
-package pl.oldcotage.simplegame.objects;
+package pl.oldcotage.simplegame.objects.template;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -57,11 +57,14 @@ abstract public class Ship {
     }
 
     public abstract Laser[] fireLasers();
+
     public abstract void movingShip(TextureAtlas textureAtlas);
 
     public void draw(Batch batch) {
         batch.draw(shipTextureRegion, xPosition, yPosition, width, height);
     }
+
+    //public boolean
 
     public float getPosition() {
         return xPosition;

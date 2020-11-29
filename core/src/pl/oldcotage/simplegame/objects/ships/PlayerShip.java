@@ -1,10 +1,11 @@
-package pl.oldcotage.simplegame.objects;
+package pl.oldcotage.simplegame.objects.ships;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import pl.oldcotage.simplegame.objects.template.Ship;
 import pl.oldcotage.simplegame.objects.weapons.Laser;
 
 public class PlayerShip extends Ship {
@@ -30,8 +31,8 @@ public class PlayerShip extends Ship {
     @Override
     public Laser[] fireLasers() {
         Laser[] laser = new Laser[2];
-        laser[0] = new Laser(xPosition + width * 0.35f, yPosition + height * 0.6f, laserWidth, laserHeight, laserTextureRegion, laserMovementSpeed);
-        laser[1] = new Laser(xPosition + width * 0.65f, yPosition + height * 0.6f, laserWidth, laserHeight, laserTextureRegion, laserMovementSpeed);
+        laser[0] = new Laser(xPosition + width * 0.35f, yPosition + height * 0.6f, laserWidth, laserHeight, laserTextureRegion, laserMovementSpeed,false);
+        laser[1] = new Laser(xPosition + width * 0.65f, yPosition + height * 0.6f, laserWidth, laserHeight, laserTextureRegion, laserMovementSpeed,false);
 
         timeSinceLastShot = 0;
 
