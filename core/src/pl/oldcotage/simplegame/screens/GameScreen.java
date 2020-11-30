@@ -19,6 +19,7 @@ import pl.oldcotage.simplegame.objects.weapons.Laser;
 import pl.oldcotage.simplegame.objects.PlayerShip;
 import pl.oldcotage.simplegame.objects.Ship;
 import pl.oldcotage.simplegame.screens.textures.Background;
+import pl.oldcotage.simplegame.services.PlayerController;
 
 public class GameScreen implements Screen {
     private final GameRunner game;
@@ -38,6 +39,9 @@ public class GameScreen implements Screen {
     private Ship enemyShip;
     private LinkedList<Laser> playerLaserList;
     private LinkedList<Laser> enemyLaserList;
+
+    //mechanics
+    private PlayerController controller;
 
     public GameScreen(GameRunner game) {
         batch = new SpriteBatch();
@@ -64,7 +68,7 @@ public class GameScreen implements Screen {
                 50, 0.9f,
                 enemyShipTextureRegion, enemyLaserTextureRegion);
 
-
+        controller = new PlayerController();
         playerLaserList = new LinkedList<>();
         enemyLaserList = new LinkedList<>();
     }
@@ -113,13 +117,15 @@ public class GameScreen implements Screen {
         while (iterator.hasNext()) {
             Laser laser = iterator.next();
             laser.draw(batch);
+            System.out.println(laser.height);
             laser.yPosition -= laser.movementSpeed * delta;
             if (laser.yPosition > GameRunner.HEIGHT) {
                 iterator.remove();
             }
         }
+        controller.detectInput(delta, playerShip);
 
-        playerShip.movingShip(textureAtlas);
+//        playerShip.movingShip(textureAtlas, batch, delta);
 
         batch.end();
     }

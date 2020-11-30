@@ -2,6 +2,8 @@ package pl.oldcotage.simplegame.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -41,19 +43,5 @@ public class PlayerShip extends Ship {
         timeSinceLastShot = 0;
 
         return laser;
-    }
-    @Override
-    public void movingShip(TextureAtlas textureAtlas) {
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            xPosition--;
-            setPosition(xPosition);
-            setShipTextureRegion(textureAtlas.findRegion("player_ship_left_2"));
-        } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            xPosition++;
-            setPosition(xPosition);
-            setShipTextureRegion(textureAtlas.findRegion("player_ship_right_2"));
-        }else{
-            setShipTextureRegion(textureAtlas.findRegion("player_ship"));
-        }
     }
 }

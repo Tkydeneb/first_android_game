@@ -1,5 +1,6 @@
 package pl.oldcotage.simplegame.objects.enemies;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -36,8 +37,5 @@ public class EnemyShip extends Ship {
         return laser;
     }
 
-    @Override
-    public void movingShip(TextureAtlas textureAtlas) {
 
-    }
 }
