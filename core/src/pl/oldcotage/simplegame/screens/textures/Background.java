@@ -23,7 +23,7 @@ public class Background {
 
     //initialize texture atlas
     private void setTextureAtlas() {
-        textureAtlas = new TextureAtlas("images.atlas");
+        textureAtlas = new TextureAtlas("utility/backgrounds/backgrounds.atlas");
     }
 
     //setting texture array for parallax background scrolling in four layers

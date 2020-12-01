@@ -29,7 +29,7 @@ public class GameScreen implements Screen {
 
 
     //graphics
-    Background background;
+    private Background background;
     private TextureRegion playerShipTextureRegion, enemyShipTextureRegion, playerLaserTextureRegion, enemyLaserTextureRegion;
     private TextureAtlas textureAtlas;
 
@@ -48,13 +48,14 @@ public class GameScreen implements Screen {
         this.game = game;
 
 
-        textureAtlas = new TextureAtlas("images.atlas");
+        textureAtlas = new TextureAtlas("ships/ships.atlas");
         //initialize textures
         background = new Background();
         playerShipTextureRegion = textureAtlas.findRegion("player_ship");
         enemyShipTextureRegion = textureAtlas.findRegion("enemy_ship");
         enemyShipTextureRegion.flip(false, true);
 
+        textureAtlas = new TextureAtlas("weapons/bullets/bullets.atlas");
         playerLaserTextureRegion = textureAtlas.findRegion("blue_bullet");
         enemyLaserTextureRegion = textureAtlas.findRegion("pink_bullet");
 
@@ -68,7 +69,7 @@ public class GameScreen implements Screen {
                 50, 0.9f,
                 enemyShipTextureRegion, enemyLaserTextureRegion);
 
-        controller = new PlayerController();
+        controller = new PlayerController(playerShip);
         playerLaserList = new LinkedList<>();
         enemyLaserList = new LinkedList<>();
     }
@@ -117,7 +118,6 @@ public class GameScreen implements Screen {
         while (iterator.hasNext()) {
             Laser laser = iterator.next();
             laser.draw(batch);
-            System.out.println(laser.height);
             laser.yPosition -= laser.movementSpeed * delta;
             if (laser.yPosition > GameRunner.HEIGHT) {
                 iterator.remove();

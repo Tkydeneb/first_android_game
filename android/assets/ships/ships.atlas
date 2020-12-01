@@ -1,0 +1,20 @@
+
+ships.png
+size: 512,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+enemy_ship
+  rotate: false
+  xy: 2, 2
+  size: 158, 170
+  orig: 158, 170
+  offset: 0, 0
+  index: -1
+player_ship
+  rotate: false
+  xy: 162, 24
+  size: 164, 148
+  orig: 164, 148
+  offset: 0, 0
+  index: -1

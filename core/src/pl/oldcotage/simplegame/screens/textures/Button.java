@@ -49,18 +49,18 @@ public class Button {
 
     //initialize texture atlas
     private void setTextureAtlas() {
-        textureAtlas = new TextureAtlas("buttons/buttons.atlas");
+        textureAtlas = new TextureAtlas("utility/buttons/buttons.atlas");
     }
 
     private void setButtonsTexture(){
         setTextureAtlas();
 
-        newGameBtnActive = textureAtlas.findRegion("new_game_active_btn");
-        newGameBtnInactive = textureAtlas.findRegion("new_game_inactive_btn");
-        settingsBtnActive = textureAtlas.findRegion("settings_active_button");
-        settingsBtnInactive = textureAtlas.findRegion("settings_inactive_btn");
-        exitBtnActive = textureAtlas.findRegion("exit_active_button");
-        exitBtnInactive = textureAtlas.findRegion("exit_inactive_btn");
+        newGameBtnActive = textureAtlas.findRegion("new_game_white");
+        newGameBtnInactive = textureAtlas.findRegion("new_game_red");
+        settingsBtnActive = textureAtlas.findRegion("options_white");
+        settingsBtnInactive = textureAtlas.findRegion("options_red");
+        exitBtnActive = textureAtlas.findRegion("exit_white");
+        exitBtnInactive = textureAtlas.findRegion("exit_red");
     }
 
     public void renderButtons() {

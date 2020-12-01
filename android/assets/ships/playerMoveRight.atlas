@@ -1,0 +1,27 @@
+
+playerMoveRight.png
+size: 512,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+player_ship_right
+  rotate: false
+  xy: 2, 2
+  size: 164, 148
+  orig: 164, 148
+  offset: 0, 0
+  index: 4
+player_ship_right
+  rotate: false
+  xy: 168, 2
+  size: 164, 148
+  orig: 164, 148
+  offset: 0, 0
+  index: 3
+player_ship_right
+  rotate: false
+  xy: 334, 2
+  size: 164, 148
+  orig: 164, 148
+  offset: 0, 0
+  index: 2

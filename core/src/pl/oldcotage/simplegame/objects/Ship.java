@@ -49,6 +49,10 @@ abstract public class Ship {
         this.shipTextureRegion = shipTextureRegion;
     }
 
+    public TextureRegion getShipTextureRegion() {
+        return shipTextureRegion;
+    }
+
     public void update(float deltaTime) {
         timeSinceLastShot += deltaTime;
     }
