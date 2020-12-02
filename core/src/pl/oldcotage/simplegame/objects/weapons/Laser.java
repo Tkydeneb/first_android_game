@@ -20,7 +20,7 @@ public class Laser {
 
     public Laser(float xPosition, float yPosition, float width, float height, TextureRegion textureRegion, float movementSpeed, boolean isEnemy) {
         this.xPosition = xPosition;
-        this.xPosition = yPosition;
+        this.yPosition = yPosition;
         this.width = width;
         this.height = height;
         this.textureRegion = textureRegion;

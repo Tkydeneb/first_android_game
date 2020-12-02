@@ -12,6 +12,7 @@ import pl.oldcotage.simplegame.objects.ships.PlayerShip;
 import pl.oldcotage.simplegame.objects.template.Ship;
 import pl.oldcotage.simplegame.screens.textures.Background;
 import pl.oldcotage.simplegame.service.LaserService;
+import pl.oldcotage.simplegame.service.ShipService;
 
 public class GameScreen implements Screen {
     private final GameRunner game;
@@ -31,8 +32,8 @@ public class GameScreen implements Screen {
     private Ship enemyShip;
 
     //game services
-    LaserService laserService = new LaserService();
-
+    private LaserService laserService;
+    private ShipService shipService;
 
 
     public GameScreen(GameRunner game) {
@@ -53,7 +54,7 @@ public class GameScreen implements Screen {
         //setUp game objects
         playerShip = new PlayerShip((float) GameRunner.WIDTH / 2, (float)GameRunner.HEIGHT / 4,
                 50, 50,
-                15, 4,
+                5, 4,
                 0.4f, 4, 45, 0.5f,
                 playerShipTextureRegion, playerLaserTextureRegion);
 
@@ -63,6 +64,11 @@ public class GameScreen implements Screen {
                 50, 0.9f,
                 enemyShipTextureRegion, enemyLaserTextureRegion);
 
+        shipService = new ShipService();
+        shipService.setPlayer(playerShip);
+        shipService.addEnemyShip(enemyShip);
+
+        laserService = new LaserService(shipService);
     }
 
 
@@ -83,8 +89,8 @@ public class GameScreen implements Screen {
         //weapons
 
         //create new lasers
-        laserService.initLaserFire(playerShip, batch, delta);
-        laserService.initLaserFire(enemyShip, batch, delta);
+        laserService.initLaserFire(batch, delta);
+
 
         playerShip.movingShip(textureAtlas);
 

@@ -41,11 +41,11 @@ public class PlayerShip extends Ship {
     @Override
     public void movingShip(TextureAtlas textureAtlas) {
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            xPosition--;
+            xPosition -= movementSpeed;
             setPosition(xPosition);
             setShipTextureRegion(textureAtlas.findRegion("player_ship_left_2"));
         } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            xPosition++;
+            xPosition += movementSpeed;
             setPosition(xPosition);
             setShipTextureRegion(textureAtlas.findRegion("player_ship_right_2"));
         }else{

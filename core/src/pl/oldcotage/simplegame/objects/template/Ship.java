@@ -3,6 +3,7 @@ package pl.oldcotage.simplegame.objects.template;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 
 import pl.oldcotage.simplegame.objects.weapons.Laser;
 
@@ -63,8 +64,10 @@ abstract public class Ship {
     public void draw(Batch batch) {
         batch.draw(shipTextureRegion, xPosition, yPosition, width, height);
     }
-
-    //public boolean
+    //TODO detect collision with other rectangles public boolean
+    public Rectangle getRectangle(){
+        return new Rectangle(xPosition, yPosition, width, height);
+    }
 
     public float getPosition() {
         return xPosition;
