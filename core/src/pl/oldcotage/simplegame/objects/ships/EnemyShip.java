@@ -37,5 +37,9 @@ public class EnemyShip extends Ship {
         return laser;
     }
 
+    @Override
+    public void movingShip(TextureAtlas textureAtlas) {
+
+    }
 
 }

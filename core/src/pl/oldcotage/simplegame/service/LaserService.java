@@ -33,7 +33,7 @@ public class LaserService {
         if (shipService.getEnemiesShips().getFirst().canFireLaser()) {
             Laser[] lasers = shipService.getEnemiesShips().getFirst().fireLasers();
             laserList.addAll(Arrays.asList(lasers));
-            System.out.println("--->" + lasers.length);
+            //System.out.println("--->" + lasers.length);
         }
         move(batch, delta);
     }

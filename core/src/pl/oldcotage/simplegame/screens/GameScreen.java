@@ -59,7 +59,7 @@ public class GameScreen implements Screen {
         enemyLaserTextureRegion = textureAtlas.findRegion("pink_bullet");
 
         //setUp game objects
-        playerShip = new PlayerShip(0.4f, 4,
+        playerShip = new PlayerShip(0.4f, 4,1,1,
                 playerShipTextureRegion, playerLaserTextureRegion);
 
         enemyShip = new EnemyShip((float)GameRunner.WIDTH / 2, (float) GameRunner.HEIGHT * 3 / 4,
@@ -96,8 +96,7 @@ public class GameScreen implements Screen {
         //create new lasers
         laserService.initLaserFire(batch, delta);
 
-
-//        playerShip.movingShip(textureAtlas, batch, delta);
+        controller.detectInput(delta);
 
         batch.end();
     }

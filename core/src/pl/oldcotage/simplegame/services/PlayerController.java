@@ -3,15 +3,15 @@ package pl.oldcotage.simplegame.services;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import pl.oldcotage.simplegame.GameRunner;
-import pl.oldcotage.simplegame.objects.Ship;
+import pl.oldcotage.simplegame.objects.template.Ship;
+import pl.oldcotage.simplegame.service.ShipService;
 
 public class PlayerController {
 
+    private ShipService shipService = new ShipService();
     private TextureRegion shipNormalPosition;
     private Animation<TextureAtlas.AtlasRegion> rightAnimation;
     private Animation<TextureAtlas.AtlasRegion> leftAnimation;
@@ -26,7 +26,8 @@ public class PlayerController {
         rightAnimation = new Animation<>(frameDuration, new TextureAtlas(Gdx.files.internal("ships/playerMoveRight.atlas")).getRegions());
     }
 
-    public void detectInput(float deltaTime, Ship ship) {
+    public void detectInput(float deltaTime) {
+        Ship ship = shipService.getPlayer();
         elapsedTime += deltaTime;
         boolean isLeftLimit, isRightLimit;
 

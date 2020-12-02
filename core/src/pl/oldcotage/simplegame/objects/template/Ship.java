@@ -1,4 +1,4 @@
-package pl.oldcotage.simplegame.objects;
+package pl.oldcotage.simplegame.objects.template;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
